@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "walkie-backend"
+version = "0.1.0"
+description = "Walkie MVP backend built with Django, DRF, Channels, and Celery."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Django>=5.2,<5.3",
+    "daphne>=4.1,<4.2",
+    "djangorestframework>=3.16,<3.17",
+    "django-cors-headers>=4.7,<4.8",
+    "channels>=4.2,<4.3",
+    "channels-redis>=4.2,<4.3",
+    "celery[redis]>=5.5,<5.6",
+    "redis>=5.2,<5.3",
+    "psycopg[binary]>=3.2,<3.3",
+    "python-dotenv>=1.1,<1.2",
+    "drf-spectacular>=0.28,<0.29",
+    "groq",
+    "sarvamai",
+    "elevenlabs",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3,<8.4",
+    "pytest-django>=4.9,<4.10",
+    "pytest-asyncio>=0.25,<0.26",
+    "model-bakery>=1.20,<1.21",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.test_settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
